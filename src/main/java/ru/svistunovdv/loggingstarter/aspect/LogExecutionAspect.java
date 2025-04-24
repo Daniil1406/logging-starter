@@ -31,11 +31,11 @@ public class LogExecutionAspect {
 
         try {
             return joinPoint.proceed();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.getCause();
         } finally {
             log.info("Время выполнения метода {}: {}", methodName, System.currentTimeMillis() - start);
         }
-
+        return joinPoint.proceed();
     }
 }
