@@ -1,9 +1,14 @@
 package ru.svistunovdv.loggingstarter;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import ru.svistunovdv.loggingstarter.aspect.LogExecutionAspect;
+
+@AutoConfiguration
 public class LoggingStarterAutoConfiguration {
 
-    public static void println(String string) {
-
-        System.out.println("HELLO WORLD " + string);
-    }
+    @Bean
+    public LogExecutionAspect logExecutionAspect(){
+        return new LogExecutionAspect();
+    };
 }
