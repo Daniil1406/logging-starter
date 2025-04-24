@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>ru.svistunovdv</groupId>
+  <artifactId>logging-starter</artifactId>
+  <versioning>
+    <lastUpdated>20250424102406</lastUpdated>
+    <snapshot>
+      <timestamp>20250424.102406</timestamp>
+      <buildNumber>2</buildNumber>
+    </snapshot>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>module</extension>
+        <value>1.5-20250424.102406-2</value>
+        <updated>20250424102406</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.5-20250424.102406-2</value>
+        <updated>20250424102406</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.5-20250424.102406-2</value>
+        <updated>20250424102406</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+  <version>1.5-SNAPSHOT</version>
+</metadata>
