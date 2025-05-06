@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 import ru.svistunovdv.loggingstarter.aspect.LogExecutionAspect;
@@ -24,8 +23,7 @@ import java.util.stream.Collectors;
 @Component
 public class WebLoggingFilter extends HttpFilter {
 
-    @Value("${logging-starter.headers}")
-    private static List<String> headers;
+    private final List<String> headers;
 
     private static final Logger log = LoggerFactory.getLogger(LogExecutionAspect.class);
 
@@ -57,7 +55,7 @@ public class WebLoggingFilter extends HttpFilter {
                     String headerName = entry.getKey();
                     String headerValue = entry.getValue();
 
-                    if (headers.contains(headerName)){
+                    if (headers.contains(headerName)) {
                         headerValue = "***";
                     }
 
@@ -74,11 +72,7 @@ public class WebLoggingFilter extends HttpFilter {
                 .orElse(Strings.EMPTY);
     }
 
-    public static List<String> getHeaders() {
-        return headers;
-    }
-
-    public static void setHeaders(List<String> headers) {
-        WebLoggingFilter.headers = headers;
+    public WebLoggingFilter(List<String> headers) {
+        this.headers = headers;
     }
 }
