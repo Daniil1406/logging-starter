@@ -1,0 +1,2 @@
+logging-starter:
+  headers: content-length,postman-token,host,content-type,connection,accept-encoding,user-agent

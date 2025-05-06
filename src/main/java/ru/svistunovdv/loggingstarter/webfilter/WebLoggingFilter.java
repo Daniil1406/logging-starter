@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 import ru.svistunovdv.loggingstarter.aspect.LogExecutionAspect;
@@ -15,12 +16,16 @@ import ru.svistunovdv.loggingstarter.aspect.LogExecutionAspect;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
 public class WebLoggingFilter extends HttpFilter {
+
+    @Value("${logging-starter.headers}")
+    private static List<String> headers;
 
     private static final Logger log = LoggerFactory.getLogger(LogExecutionAspect.class);
 
@@ -52,6 +57,10 @@ public class WebLoggingFilter extends HttpFilter {
                     String headerName = entry.getKey();
                     String headerValue = entry.getValue();
 
+                    if (headers.contains(headerName)){
+                        headerValue = "***";
+                    }
+
                     return headerName + "=" + headerValue;
                 })
                 .collect(Collectors.joining(","));
@@ -63,5 +72,13 @@ public class WebLoggingFilter extends HttpFilter {
         return Optional.ofNullable(request.getQueryString())
                 .map(qs -> "?=" + qs)
                 .orElse(Strings.EMPTY);
+    }
+
+    public static List<String> getHeaders() {
+        return headers;
+    }
+
+    public static void setHeaders(List<String> headers) {
+        WebLoggingFilter.headers = headers;
     }
 }
