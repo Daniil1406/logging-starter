@@ -3,7 +3,7 @@
   "component": {
     "group": "ru.svistunovdv",
     "module": "logging-starter",
-    "version": "1.6-SNAPSHOT",
+    "version": "1.7-SNAPSHOT",
     "attributes": {
       "org.gradle.status": "integration"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "logging-starter-1.6-SNAPSHOT.jar",
-          "url": "logging-starter-1.6-SNAPSHOT.jar",
-          "size": 10405,
-          "sha512": "04897cb80807510644665bf36934dcef1e3ffea6d73a8e58a54b2e7ff804506f63ee0eb7608e88391d2d50f96c361c17f0a85ea8c4d4b563c45df6151104fa0c",
-          "sha256": "2f7884cdeb9b9412c442541d7603f777d0a9291c0be9e24acd5895d4f0b146c2",
-          "sha1": "6a3f165e03308d107299bef41bf83affb05ab891",
-          "md5": "a493cf2b307e2ca14b7185c7a45a0213"
+          "name": "logging-starter-1.7-SNAPSHOT.jar",
+          "url": "logging-starter-1.7-SNAPSHOT.jar",
+          "size": 9860,
+          "sha512": "f7bbc3b57dd7ce0bf71fa1ca5e951a33fb185dcb97188d5e24f5c3fb7cbe787e4dd6ce363b77bdcb45ae1b004b64864e5d562e54738645966465aa86b5642065",
+          "sha256": "9419dba91131723956e6ed13d2ccaa89bb378704155cf76113bc42302e4cdd49",
+          "sha1": "6cdbdbee398dd8d145e4d4304ec93fdd8f5e4e34",
+          "md5": "2a80758d2daf62673414f1f70981898c"
         }
       ]
     },
@@ -62,13 +62,13 @@
       ],
       "files": [
         {
-          "name": "logging-starter-1.6-SNAPSHOT.jar",
-          "url": "logging-starter-1.6-SNAPSHOT.jar",
-          "size": 10405,
-          "sha512": "04897cb80807510644665bf36934dcef1e3ffea6d73a8e58a54b2e7ff804506f63ee0eb7608e88391d2d50f96c361c17f0a85ea8c4d4b563c45df6151104fa0c",
-          "sha256": "2f7884cdeb9b9412c442541d7603f777d0a9291c0be9e24acd5895d4f0b146c2",
-          "sha1": "6a3f165e03308d107299bef41bf83affb05ab891",
-          "md5": "a493cf2b307e2ca14b7185c7a45a0213"
+          "name": "logging-starter-1.7-SNAPSHOT.jar",
+          "url": "logging-starter-1.7-SNAPSHOT.jar",
+          "size": 9860,
+          "sha512": "f7bbc3b57dd7ce0bf71fa1ca5e951a33fb185dcb97188d5e24f5c3fb7cbe787e4dd6ce363b77bdcb45ae1b004b64864e5d562e54738645966465aa86b5642065",
+          "sha256": "9419dba91131723956e6ed13d2ccaa89bb378704155cf76113bc42302e4cdd49",
+          "sha1": "6cdbdbee398dd8d145e4d4304ec93fdd8f5e4e34",
+          "md5": "2a80758d2daf62673414f1f70981898c"
         }
       ]
     }

@@ -3,28 +3,28 @@
   <groupId>ru.svistunovdv</groupId>
   <artifactId>logging-starter</artifactId>
   <versioning>
-    <lastUpdated>20250506064941</lastUpdated>
+    <lastUpdated>20250506091022</lastUpdated>
     <snapshot>
-      <timestamp>20250506.064941</timestamp>
+      <timestamp>20250506.091022</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
     <snapshotVersions>
       <snapshotVersion>
         <extension>module</extension>
-        <value>1.6-20250506.064941-1</value>
-        <updated>20250506064941</updated>
-      </snapshotVersion>
-      <snapshotVersion>
-        <extension>pom</extension>
-        <value>1.6-20250506.064941-1</value>
-        <updated>20250506064941</updated>
+        <value>1.7-20250506.091022-1</value>
+        <updated>20250506091022</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>1.6-20250506.064941-1</value>
-        <updated>20250506064941</updated>
+        <value>1.7-20250506.091022-1</value>
+        <updated>20250506091022</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.7-20250506.091022-1</value>
+        <updated>20250506091022</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
-  <version>1.6-SNAPSHOT</version>
+  <version>1.7-SNAPSHOT</version>
 </metadata>
