@@ -55,8 +55,10 @@ public class WebLoggingFilter extends HttpFilter {
                     String headerName = entry.getKey();
                     String headerValue = entry.getValue();
 
-                    if (headers.contains(headerName)) {
-                        headerValue = "***";
+                    if (!headers.isEmpty()) {
+                        if (headers.contains(headerName)) {
+                            headerValue = "***";
+                        }
                     }
 
                     return headerName + "=" + headerValue;
