@@ -1,18 +1,19 @@
 package ru.svistunovdv.loggingstarter;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.ComponentScan;
 import ru.svistunovdv.loggingstarter.aspect.LogExecutionAspect;
+import ru.svistunovdv.loggingstarter.property.ConfigurationProperties;
 import ru.svistunovdv.loggingstarter.webfilter.WebLoggingFilter;
 import ru.svistunovdv.loggingstarter.webfilter.WebLoggingRequestBodyAdvice;
 
 import java.util.List;
 
 @AutoConfiguration
-@PropertySource("classpath:application.properties")
+@ComponentScan
 @ConditionalOnProperty(prefix = "logging", value = "enabled", havingValue = "true", matchIfMissing = true)
 public class LoggingStarterAutoConfiguration {
 
@@ -24,8 +25,8 @@ public class LoggingStarterAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "logging.web-logging", value = "enabled", havingValue = "true", matchIfMissing = true)
-    public WebLoggingFilter webLoggingFilter(@Value("${logging-starter.headers.keys}") List<String> headers) {
-        return new WebLoggingFilter(headers);
+    public WebLoggingFilter webLoggingFilter(ConfigurationProperties properties) {
+        return new WebLoggingFilter(properties);
     }
 
     @Bean

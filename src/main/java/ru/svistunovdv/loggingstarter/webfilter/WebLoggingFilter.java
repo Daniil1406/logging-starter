@@ -8,9 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 import ru.svistunovdv.loggingstarter.aspect.LogExecutionAspect;
+import ru.svistunovdv.loggingstarter.property.ConfigurationProperties;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -23,9 +25,14 @@ import java.util.stream.Collectors;
 @Component
 public class WebLoggingFilter extends HttpFilter {
 
-    private final List<String> headers;
+    @Autowired
+    private final ConfigurationProperties properties;
 
     private static final Logger log = LoggerFactory.getLogger(LogExecutionAspect.class);
+
+    public WebLoggingFilter(ConfigurationProperties properties) {
+        this.properties = properties;
+    }
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -50,13 +57,22 @@ public class WebLoggingFilter extends HttpFilter {
     private String inlineHeaders(HttpServletRequest request) {
         Map<String, String> headersMap = Collections.list(request.getHeaderNames()).stream()
                 .collect(Collectors.toMap(it -> it, request::getHeader));
+
+        Boolean isEmpty = properties.getRequestHeadersKeys().isEmpty();
+
+        if (!isEmpty) {
+            properties.setRequestHeadersKeys(properties.getRequestHeadersKeys().stream()
+                    .map(it -> it.toLowerCase())
+                    .toList());
+        }
+
         String inlineHeaders = headersMap.entrySet().stream()
                 .map(entry -> {
                     String headerName = entry.getKey();
                     String headerValue = entry.getValue();
 
-                    if (!headers.isEmpty()) {
-                        if (headers.contains(headerName)) {
+                    if (!isEmpty) {
+                        if (properties.getRequestHeadersKeys().contains(headerName.toLowerCase())) {
                             headerValue = "***";
                         }
                     }
@@ -72,9 +88,5 @@ public class WebLoggingFilter extends HttpFilter {
         return Optional.ofNullable(request.getQueryString())
                 .map(qs -> "?=" + qs)
                 .orElse(Strings.EMPTY);
-    }
-
-    public WebLoggingFilter(List<String> headers) {
-        this.headers = headers;
     }
 }
