@@ -1,6 +1,5 @@
 package ru.svistunovdv.loggingstarter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -9,8 +8,6 @@ import ru.svistunovdv.loggingstarter.aspect.LogExecutionAspect;
 import ru.svistunovdv.loggingstarter.property.ConfigurationProperties;
 import ru.svistunovdv.loggingstarter.webfilter.WebLoggingFilter;
 import ru.svistunovdv.loggingstarter.webfilter.WebLoggingRequestBodyAdvice;
-
-import java.util.List;
 
 @AutoConfiguration
 @ComponentScan

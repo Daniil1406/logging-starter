@@ -1,21 +1,20 @@
 package ru.svistunovdv.loggingstarter.property;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@org.springframework.boot.context.properties.ConfigurationProperties("logging-starter")
 public class ConfigurationProperties {
+    
+    private List<String> maskingHeaders = List.of();
 
-    @Value("${logging-starter.headers.keys}")
-    private List<String> requestHeadersKeys;
-
-    public List<String> getRequestHeadersKeys() {
-        return requestHeadersKeys;
+    public List<String> getMaskingHeaders() {
+        return maskingHeaders;
     }
 
-    public void setRequestHeadersKeys(List<String> requestHeadersKeys) {
-        this.requestHeadersKeys = requestHeadersKeys;
+    public void setMaskingHeaders(List<String> maskingHeaders) {
+        this.maskingHeaders = maskingHeaders;
     }
 }
