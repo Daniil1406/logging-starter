@@ -6,7 +6,7 @@ import java.util.List;
 
 @Component
 @org.springframework.boot.context.properties.ConfigurationProperties("logging-starter")
-public class ConfigurationProperties {
+public class LogginStarterProperty {
     
     private List<String> maskingHeaders = List.of();
 

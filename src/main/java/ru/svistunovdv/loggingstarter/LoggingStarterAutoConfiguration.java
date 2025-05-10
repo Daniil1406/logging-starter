@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import ru.svistunovdv.loggingstarter.aspect.LogExecutionAspect;
-import ru.svistunovdv.loggingstarter.property.ConfigurationProperties;
+import ru.svistunovdv.loggingstarter.property.LogginStarterProperty;
 import ru.svistunovdv.loggingstarter.webfilter.WebLoggingFilter;
 import ru.svistunovdv.loggingstarter.webfilter.WebLoggingRequestBodyAdvice;
 
@@ -22,8 +22,8 @@ public class LoggingStarterAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "logging.web-logging", value = "enabled", havingValue = "true", matchIfMissing = true)
-    public WebLoggingFilter webLoggingFilter(ConfigurationProperties properties) {
-        return new WebLoggingFilter(properties);
+    public WebLoggingFilter webLoggingFilter(LogginStarterProperty property) {
+        return new WebLoggingFilter(property);
     }
 
     @Bean

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 import ru.svistunovdv.loggingstarter.aspect.LogExecutionAspect;
-import ru.svistunovdv.loggingstarter.property.ConfigurationProperties;
+import ru.svistunovdv.loggingstarter.property.LogginStarterProperty;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -26,12 +26,12 @@ import java.util.stream.Collectors;
 public class WebLoggingFilter extends HttpFilter {
 
     @Autowired
-    private final ConfigurationProperties properties;
+    private final LogginStarterProperty property;
 
     private static final Logger log = LoggerFactory.getLogger(LogExecutionAspect.class);
 
-    public WebLoggingFilter(ConfigurationProperties properties) {
-        this.properties = properties;
+    public WebLoggingFilter(LogginStarterProperty property) {
+        this.property = property;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class WebLoggingFilter extends HttpFilter {
         Map<String, String> headersMap = Collections.list(request.getHeaderNames()).stream()
                 .collect(Collectors.toMap(it -> it, request::getHeader));
 
-        List<String> maskingHeadersToLowerCase = properties.getMaskingHeaders().stream()
+        List<String> maskingHeadersToLowerCase = property.getMaskingHeaders().stream()
                 .map(it -> it.toLowerCase())
                 .toList();
 
@@ -67,7 +67,8 @@ public class WebLoggingFilter extends HttpFilter {
                     String headerName = entry.getKey();
                     String headerValue = entry.getValue();
 
-                    if (maskingHeadersToLowerCase.contains(headerName.toLowerCase())) {
+                    if (property.getMaskingHeaders().stream()
+                            .anyMatch(h -> headerName.equalsIgnoreCase(h))) {
                         headerValue = "***";
                     }
 
