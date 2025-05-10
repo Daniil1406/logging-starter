@@ -58,10 +58,6 @@ public class WebLoggingFilter extends HttpFilter {
         Map<String, String> headersMap = Collections.list(request.getHeaderNames()).stream()
                 .collect(Collectors.toMap(it -> it, request::getHeader));
 
-        List<String> maskingHeadersToLowerCase = property.getMaskingHeaders().stream()
-                .map(it -> it.toLowerCase())
-                .toList();
-
         String inlineHeaders = headersMap.entrySet().stream()
                 .map(entry -> {
                     String headerName = entry.getKey();
