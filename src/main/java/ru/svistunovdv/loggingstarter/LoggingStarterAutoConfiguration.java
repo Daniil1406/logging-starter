@@ -1,9 +1,34 @@
 package ru.svistunovdv.loggingstarter;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import ru.svistunovdv.loggingstarter.aspect.LogExecutionAspect;
+import ru.svistunovdv.loggingstarter.property.LogginStarterProperty;
+import ru.svistunovdv.loggingstarter.webfilter.WebLoggingFilter;
+import ru.svistunovdv.loggingstarter.webfilter.WebLoggingRequestBodyAdvice;
+
+@AutoConfiguration
+@ComponentScan
+@ConditionalOnProperty(prefix = "logging", value = "enabled", havingValue = "true", matchIfMissing = true)
 public class LoggingStarterAutoConfiguration {
 
-    public static void println(String string) {
+    @Bean
+    @ConditionalOnProperty(prefix = "logging", value = "log-exec-time", havingValue = "true")
+    public LogExecutionAspect logExecutionAspect() {
+        return new LogExecutionAspect();
+    }
 
-        System.out.println("Hello world!" + string);
+    @Bean
+    @ConditionalOnProperty(prefix = "logging.web-logging", value = "enabled", havingValue = "true", matchIfMissing = true)
+    public WebLoggingFilter webLoggingFilter(LogginStarterProperty property) {
+        return new WebLoggingFilter(property);
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "logging.web-logging", value = {"enabled", "log-body"}, havingValue = "true")
+    public WebLoggingRequestBodyAdvice webLoggingRequestBodyAdvice() {
+        return new WebLoggingRequestBodyAdvice();
     }
 }
