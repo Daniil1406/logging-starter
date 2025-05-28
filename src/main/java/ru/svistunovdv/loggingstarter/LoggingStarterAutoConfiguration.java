@@ -1,11 +1,14 @@
 package ru.svistunovdv.loggingstarter;
 
+import feign.Logger;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import ru.svistunovdv.loggingstarter.aspect.LogExecutionAspect;
+import ru.svistunovdv.loggingstarter.feign.FeignRequestLogging;
 import ru.svistunovdv.loggingstarter.property.LogginStarterProperty;
+import ru.svistunovdv.loggingstarter.service.LoggingService;
 import ru.svistunovdv.loggingstarter.webfilter.WebLoggingFilter;
 import ru.svistunovdv.loggingstarter.webfilter.WebLoggingRequestBodyAdvice;
 
@@ -22,13 +25,30 @@ public class LoggingStarterAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "logging.web-logging", value = "enabled", havingValue = "true", matchIfMissing = true)
-    public WebLoggingFilter webLoggingFilter(LogginStarterProperty property) {
-        return new WebLoggingFilter(property);
+    public WebLoggingFilter webLoggingFilter() {
+        return new WebLoggingFilter();
     }
 
     @Bean
     @ConditionalOnProperty(prefix = "logging.web-logging", value = {"enabled", "log-body"}, havingValue = "true")
     public WebLoggingRequestBodyAdvice webLoggingRequestBodyAdvice() {
         return new WebLoggingRequestBodyAdvice();
+    }
+
+    @Bean
+    public LoggingService loggingService(LogginStarterProperty property) {
+        return new LoggingService(property);
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "logging.web-logging", value = "log-feign-requests", havingValue = "true")
+    public FeignRequestLogging feignRequestLogging() {
+        return new FeignRequestLogging();
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "logging.web-logging", value = "log-feign-requests", havingValue = "true")
+    public Logger.Level feignLoggerLevel() {
+        return Logger.Level.BASIC;
     }
 }
